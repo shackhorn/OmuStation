@@ -135,7 +135,11 @@ namespace Content.Client.Voting
                     return;
                 }
 
-                _voteSource?.Restart();
+                if (_client.RunLevel.IsInGameLike()) 
+                // Omu - Only play vote sound if client is NOT in queue. Otherwise, they will hear a ding when they can't even vote.
+                {
+                    _voteSource?.Restart();
+                }
                 @new = true;
 
                 // Refresh
